@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 3.25.1)
 project(tree_programming_lang C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(tree_programming_lang src/main.c)
+add_executable(tree_programming_lang src/tree.c
+        src/run.c
+        include/run.h)
