@@ -5,4 +5,8 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(tree_programming_lang src/tree.c
         src/run.c
-        include/run.h)
+        include/run.h
+        src/token.c
+        include/token.h
+        src/lexer.c
+        include/lexer.h)
