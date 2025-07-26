@@ -10,7 +10,7 @@
 /***********************************************************
  * DEFINITIONS
  ***********************************************************/
-Lexer_t *new_lexer(char *code)
+Lexer_t *new_lexer(const char *code)
 {
     assert(code != NULL);
 
@@ -25,9 +25,11 @@ Lexer_t *new_lexer(char *code)
     lexer->code = strdup(code);
     if (lexer->code == NULL)
     {
-        fprintf(stderr, "Failed to allocate memory for a new lexer\n");
+        fprintf(stderr, "Failed to allocate memory for a new lexer's source code\n");
         exit(EXIT_FAILURE);
     }
+
+    read_character(lexer);
     return lexer;
 }
 
@@ -41,4 +43,15 @@ void destroy_lexer(Lexer_t **lexer)
 
     free(*lexer);
     *lexer = NULL;
+}
+
+void read_character(Lexer_t *lexer)
+{
+    if (lexer->current_code_pos >= strlen(lexer->code))
+        lexer->current_char = 0;
+    else
+        lexer->current_char = lexer->code[lexer->current_code_pos];
+
+    lexer->current_char_pos = lexer->current_code_pos;
+    lexer->current_code_pos++;
 }
