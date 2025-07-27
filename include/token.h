@@ -25,6 +25,7 @@ typedef enum TokenType
     // LOGIC
     EQUAL_T, NOT_EQUAL_T, LESS_T,
     GREATER_T, LESS_EQUAL_T, GREATER_EQUAL_T,
+    ASSIGN_T,
 
     // LITERALS
     IDENTIFIER_T, NUMBER_T,
@@ -44,14 +45,35 @@ typedef enum TokenType
 typedef struct Token_t
 {
     TokenType type;
-    char      *lexeme;
-    size_t     line;
+    char      *literal;
 } Token_t;
 
+/***********************************************************
+ * DATA
+ ***********************************************************/
+static char *token_strings[] =
+{
+    // ARITHMETIC
+    "+", "-", "*", "/",
+    // PARENTHESIS
+    "(", ")", "[", "]",
+    // COMMENTS
+    ";",
+    // LOGIC
+    "==", "!=", "<", ">", "<=", ">=", "=",
+    // KEYWORDS
+    "and", "or", "if", "else", "else if",
+    "true", "false", "set", "while", "return",
+    "block",
+    // SPECIAL
+    "\0", "illegal"
+};
 
 /***********************************************************
  * PROTOTYPES
  ***********************************************************/
-Token_t generate_token (Lexer_t *);
+Token_t generate_token  (Lexer_t *);
+Token_t new_token       (TokenType);
+char   *get_token_string(TokenType);
 
 #endif //TOKEN_H

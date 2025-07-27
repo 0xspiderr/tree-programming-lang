@@ -9,4 +9,6 @@ add_executable(tree_programming_lang src/tree.c
         src/token.c
         include/token.h
         src/lexer.c
-        include/lexer.h)
+        include/lexer.h
+        tests/test_lexer.c
+        tests/test_lexer.h)
