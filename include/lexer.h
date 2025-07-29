@@ -22,5 +22,9 @@ typedef struct Lexer_t
 Lexer_t *new_lexer      (const char *);
 void     destroy_lexer  (Lexer_t **);
 void     read_character (Lexer_t *);
+char    *read_identifier(Lexer_t *);
+char    *read_number    (Lexer_t *);
+char     is_letter      (char);
+char     is_digit       (char);
 
 #endif //LEXER_H

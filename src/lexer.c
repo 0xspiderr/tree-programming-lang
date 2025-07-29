@@ -55,3 +55,56 @@ void read_character(Lexer_t *lexer)
     lexer->current_char_pos = lexer->current_code_pos;
     lexer->current_code_pos++;
 }
+
+char *read_identifier(Lexer_t *lexer)
+{
+    char *identifier = "";
+    size_t start_pos = lexer->current_char_pos;
+    size_t identifier_size = 0;
+
+    while (is_letter(lexer->current_char))
+    {
+        read_character(lexer);
+        identifier_size++;
+    }
+
+    identifier = strndup(lexer->code + start_pos, identifier_size);
+    if (identifier == NULL)
+    {
+        fprintf(stderr, "Failed to allocate memory for a new identifier\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return identifier;
+}
+
+char *read_number(Lexer_t *lexer)
+{
+    char *number = "";
+    size_t start_pos = lexer->current_char_pos;
+    size_t number_size = 0;
+    while (is_digit(lexer->current_char))
+    {
+        read_character(lexer);
+        number_size++;
+    }
+
+    number = strndup(lexer->code + start_pos, number_size);
+    if (number == NULL)
+    {
+        fprintf(stderr, "Failed to allocate memory for a new number\n");
+        exit(EXIT_FAILURE);
+    }
+
+    return number;
+}
+
+char is_letter(char c)
+{
+    return c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c == '_';
+}
+
+char is_digit(char d)
+{
+    return d >= '0' && d <= '9';
+}
