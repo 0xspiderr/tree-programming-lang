@@ -4,7 +4,7 @@
  * INCLUDES
  ***********************************************************/
 #include <stddef.h>
-#include "../include/lexer.h"
+#include "lexer.h"
 
 /***********************************************************
  * ENUMS
@@ -13,7 +13,7 @@ typedef enum TokenType
 {
     // ARITHMETIC
     PLUS_T, MINUS_T,
-    ASTERISK_T, SLASH_T,
+    MULTIPLY_T, DIVIDE_T,
 
     // PARENTHESIS
     LEFT_PARENTHESIS_T, RIGHT_PARENTHESIS_T,
@@ -25,7 +25,7 @@ typedef enum TokenType
     // LOGIC
     EQUAL_T, NOT_EQUAL_T, LESS_T,
     GREATER_T, LESS_EQUAL_T, GREATER_EQUAL_T,
-    ASSIGN_T,
+    ASSIGN_T, NOT_T,
 
     // LITERALS
     IDENTIFIER_T, NUMBER_T,
@@ -63,7 +63,9 @@ static char *token_strings[] =
     // COMMENTS / SEPARATORS
     ";", ",",
     // LOGIC
-    "==", "!=", "<", ">", "<=", ">=", "=",
+    "==", "!=", "<", ">", "<=", ">=", "=", "!",
+    //
+    "identifier", "number",
     // KEYWORDS
     "and", "or", "if", "else", "else if",
     "true", "false", "set", "while", "return",
@@ -83,7 +85,9 @@ static Token_t keywords[] =
     {SET_T     , "set"},
     {RETURN_T  , "return"},
     {BLOCK_T   , "block"},
-    {ENDBLOCK_T, "endblock"}
+    {ENDBLOCK_T, "endblock"},
+    {TRUE_T    , "true"},
+    {FALSE_T   , "false"}
 };
 
 /***********************************************************
@@ -93,6 +97,5 @@ Token_t    generate_token  (Lexer_t *);
 Token_t    new_token       (TokenType);
 char      *get_token_string(TokenType);
 TokenType  get_keyword     (char *);
-void       kill_whitespace (Lexer_t *);
 
 #endif //TOKEN_H

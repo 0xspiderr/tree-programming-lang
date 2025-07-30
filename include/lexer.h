@@ -26,5 +26,7 @@ char    *read_identifier(Lexer_t *);
 char    *read_number    (Lexer_t *);
 char     is_letter      (char);
 char     is_digit       (char);
+void     kill_whitespace(Lexer_t *);
+char     get_next_char  (Lexer_t *);
 
 #endif //LEXER_H

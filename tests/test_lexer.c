@@ -46,6 +46,32 @@ LexerTest test_program[] =
     {COMMA_T            , ","},
     {IDENTIFIER_T       , "y"},
     {RIGHT_PARENTHESIS_T, ")"},
+    {PLUS_T             , "+"},
+    {MINUS_T            , "-"},
+    {ASSIGN_T           , "="},
+    {DIVIDE_T           , "/"},
+    {MULTIPLY_T         , "*"},
+    {NUMBER_T           , "12"},
+    {GREATER_T          , ">"},
+    {NUMBER_T           , "4"},
+    {IF_T               , "if"},
+    {LEFT_PARENTHESIS_T , "("},
+    {NUMBER_T           , "4"},
+    {GREATER_T          , ">"},
+    {NUMBER_T           , "12"},
+    {RIGHT_PARENTHESIS_T, ")"},
+    {RETURN_T           , "return"},
+    {TRUE_T             , "true"},
+    {ELSE_T             , "else"},
+    {RETURN_T           , "return"},
+    {FALSE_T            , "false"},
+    {ENDIF_T            , "endif"},
+    {NUMBER_T           , "12"},
+    {EQUAL_T            , "=="},
+    {NUMBER_T           , "12"},
+    {NUMBER_T           , "4"},
+    {NOT_EQUAL_T        , "!="},
+    {NUMBER_T           , "12"},
     {EOF_T              , ""}
 };
 void test_generate_token()
@@ -55,7 +81,16 @@ void test_generate_token()
                          "block subtract(x, y) "
                          "  x - y "
                          "endblock "
-                         "set ans = subtract(x, y) ";
+                         "set ans = subtract(x, y) "
+                         "+-=/* "
+                         "12 > 4 "
+                         "if(4 > 12)"
+                         "  return true "
+                         "else "
+                         "  return false "
+                         "endif "
+                         "12 == 12 "
+                         "4 != 12 ";
     size_t i = 0;
     size_t n = sizeof(test_program) / sizeof(test_program[0]);
     Lexer_t *lexer = new_lexer(source_code);

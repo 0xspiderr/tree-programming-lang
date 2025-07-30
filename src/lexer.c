@@ -108,3 +108,22 @@ char is_digit(char d)
 {
     return d >= '0' && d <= '9';
 }
+
+void kill_whitespace(Lexer_t *lexer)
+{
+    while (lexer->current_char == ' '
+        || lexer->current_char == '\t'
+        || lexer->current_char == '\n'
+        || lexer->current_char == '\r')
+    {
+        read_character(lexer);
+    }
+}
+
+char get_next_char(Lexer_t *lexer)
+{
+    if (lexer->current_code_pos >= strlen(lexer->code))
+        return 0;
+
+    return lexer->code[lexer->current_code_pos];
+}

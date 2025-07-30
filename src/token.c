@@ -1,3 +1,6 @@
+/***********************************************************
+ * INCLUDES
+ ***********************************************************/
 #include "../include/token.h"
 #include <assert.h>
 #include <stdio.h>
@@ -5,6 +8,9 @@
 #include <string.h>
 #include <wchar.h>
 
+/***********************************************************
+ * DEFINITIONS
+ ***********************************************************/
 Token_t generate_token(Lexer_t *lexer)
 {
     assert(lexer != NULL);
@@ -15,9 +21,7 @@ Token_t generate_token(Lexer_t *lexer)
 
     switch (lexer->current_char)
     {
-        case '=':
-            token = new_token(ASSIGN_T);
-            break;
+        // ARITHMETIC
         case '+':
             token = new_token(PLUS_T);
             break;
@@ -25,11 +29,12 @@ Token_t generate_token(Lexer_t *lexer)
             token = new_token(MINUS_T);
             break;
         case '*':
-            token = new_token(ASTERISK_T);
+            token = new_token(MULTIPLY_T);
             break;
         case '/':
-            token = new_token(SLASH_T);
+            token = new_token(DIVIDE_T);
             break;
+        // PARENTHESIS
         case '(':
             token = new_token(LEFT_PARENTHESIS_T);
             break;
@@ -42,11 +47,57 @@ Token_t generate_token(Lexer_t *lexer)
         case ']':
             token = new_token(RIGHT_BRACE_T);
             break;
+        // COMMENTS / SEPARATORS
         case ';':
             token = new_token(SEMICOLON_T);
             break;
         case ',':
             token = new_token(COMMA_T);
+            break;
+        // LOGIC
+        case '=':
+            if (get_next_char(lexer) == '=')
+            {
+                read_character(lexer);
+                token = new_token(EQUAL_T);
+            }
+            else
+            {
+                token = new_token(ASSIGN_T);
+            }
+            break;
+        case '!':
+            if (get_next_char(lexer) == '=')
+            {
+                read_character(lexer);
+                token = new_token(NOT_EQUAL_T);
+            }
+            else
+            {
+                token = new_token(NOT_T);
+            }
+            break;
+        case '>':
+            if (get_next_char(lexer) == '=')
+            {
+                read_character(lexer);
+                token = new_token(GREATER_EQUAL_T);
+            }
+            else
+            {
+                token = new_token(GREATER_T);
+            }
+            break;
+        case '<':
+            if (get_next_char(lexer) == '=')
+            {
+                read_character(lexer);
+                token = new_token(LESS_EQUAL_T);
+            }
+            else
+            {
+                token = new_token(LESS_T);
+            }
             break;
         case '\0':
             token.type = EOF_T;
@@ -107,15 +158,4 @@ TokenType get_keyword(char *identifier)
     }
 
     return IDENTIFIER_T;
-}
-
-void kill_whitespace(Lexer_t *lexer)
-{
-    while (lexer->current_char == ' '
-        || lexer->current_char == '\t'
-        || lexer->current_char == '\n'
-        || lexer->current_char == '\r')
-    {
-        read_character(lexer);
-    }
 }
