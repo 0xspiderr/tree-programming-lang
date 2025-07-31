@@ -1,7 +1,8 @@
+#include "../include/run.h"
 #include "../tests/test_lexer.h"
 
 int main(int argc, char **argv)
 {
-    test_generate_token();
+    exec_repl();
     return 0;
 }
