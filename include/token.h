@@ -20,7 +20,7 @@ typedef enum TokenType
     LEFT_BRACE_T, RIGHT_BRACE_T,
 
     // COMMENTS / SEPARATORS
-    SEMICOLON_T, COMMA_T,
+    SEMICOLON_T, COMMA_T, NEW_LINE_T,
 
     // LOGIC
     EQUAL_T, NOT_EQUAL_T, LESS_T,
@@ -61,7 +61,7 @@ static char *token_strings[] =
     // PARENTHESIS
     "(", ")", "[", "]",
     // COMMENTS / SEPARATORS
-    ";", ",",
+    ";", ",", "\\n",
     // LOGIC
     "==", "!=", "<", ">", "<=", ">=", "=", "!",
     //

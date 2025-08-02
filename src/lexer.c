@@ -113,7 +113,6 @@ void kill_whitespace(Lexer_t *lexer)
 {
     while (lexer->current_char == ' '
         || lexer->current_char == '\t'
-        || lexer->current_char == '\n'
         || lexer->current_char == '\r')
     {
         read_character(lexer);

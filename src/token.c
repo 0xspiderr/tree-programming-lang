@@ -54,6 +54,9 @@ Token_t generate_token(Lexer_t *lexer)
         case ',':
             token = new_token(COMMA_T);
             break;
+        case '\n':
+            token = new_token(NEW_LINE_T);
+            break;
         // LOGIC
         case '=':
             if (get_next_char(lexer) == '=')
