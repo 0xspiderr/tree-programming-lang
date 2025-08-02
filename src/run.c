@@ -3,6 +3,8 @@
  ***********************************************************/
 #include "../include/run.h"
 
+#include <string.h>
+
 #include "../include/lexer.h"
 #include "../include/token.h"
 
@@ -30,7 +32,9 @@ void exec_repl()
     {
         fprintf(stdout, "tree: ");
         fgets(line, MAX_LINE_LENGTH, stdin);
-        if (line == NULL)
+        line[strlen(line) - 1] = 0;
+
+        if (line == NULL || strcmp(line, "exit") == 0)
             break;
 
         lexer = new_lexer(line);
