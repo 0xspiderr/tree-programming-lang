@@ -12,5 +12,7 @@ add_executable(tree_programming_lang src/tree.c
         include/lexer.h
         tests/test_lexer.c
         tests/test_lexer.h
+        src/ast.c
+        include/ast.h
         src/parser.c
         include/parser.h)
