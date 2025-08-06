@@ -2,7 +2,7 @@
 #include "../include/run.h"
 #include "../tests/test_lexer.h"
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     //exec_repl();
 
@@ -10,9 +10,16 @@ void main(int argc, char **argv)
 	Parser_t *parser = new_parser(lexer);
 
 	printf("%s %s\n", parser->current_token.literal, parser->peek_token.literal);
-
+	next_token(parser);
+	printf("%s %s\n", parser->current_token.literal, parser->peek_token.literal);
+	next_token(parser);
+	printf("%s %s\n", parser->current_token.literal, parser->peek_token.literal);
+	next_token(parser);
+	printf("%s %s\n", parser->current_token.literal, parser->peek_token.literal);
 	free(parser);
 	parser = NULL;
 
 	destroy_lexer(&lexer);
+
+	return 0;
 }
