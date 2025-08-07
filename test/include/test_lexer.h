@@ -4,17 +4,16 @@
  * INCLUDES
  ***********************************************************/
 #include <stdio.h>
-
-#include "../include/lexer.h"
-#include "../include/token.h"
+#include "../../include/lexer.h"
+#include "../../include/token.h"
 
 /***********************************************************
  * STRUCTURES
  ***********************************************************/
 typedef struct LexerTest
 {
-    TokenType expected_type;
-    char     *expected_literal;
+	TokenType expected_type;
+	char     *expected_literal;
 } LexerTest;
 
 

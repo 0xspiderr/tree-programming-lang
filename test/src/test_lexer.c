@@ -1,6 +1,7 @@
-#include "../tests/test_lexer.h"
-
+#include "../include/test_lexer.h"
 #include <string.h>
+
+#include "../../include/errors.h"
 
 /***********************************************************
  * DEFINITIONS
@@ -97,21 +98,11 @@ void test_generate_token()
     for (i = 0; i < n; i++)
     {
         Token_t token = generate_token(lexer);
-        if (token.type != test_program[i].expected_type)
-        {
-            fprintf(stderr, "[TEST %llu] Wrong token type. Expected '%s', got '%s'\n",
-                i,
-                get_token_string(test_program[i].expected_type),
-                get_token_string(token.type));
-        }
 
-        if (strcmp(token.literal, test_program[i].expected_literal) != 0)
-        {
-            fprintf(stderr, "[TEST %llu] Wrong string literal. Expected '%s', got '%s'\n", i,
-                test_program[i].expected_literal,
-                token.literal);
-        }
+		TEST_EQ_TOK(test_program[i].expected_type, token.type);
+        TEST_EQ_STR(test_program[i].expected_literal, token.literal);
     }
 
     destroy_lexer(&lexer);
 }
+

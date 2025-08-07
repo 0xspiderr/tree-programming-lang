@@ -8,6 +8,8 @@
 #include <string.h>
 #include <wchar.h>
 
+#include "../include/errors.h"
+
 /***********************************************************
  * DEFINITIONS
  ***********************************************************/
@@ -135,11 +137,8 @@ Token_t new_token(TokenType type)
     Token_t token = {0};
     token.type = type;
     token.literal = strdup(get_token_string(type));
-    if (token.literal == NULL)
-    {
-        fprintf(stderr, "Failed allocation for new token literal\n");
-        exit(EXIT_FAILURE);
-    }
+
+	ASSERT_MALLOC(token.literal);
 
     return token;
 }

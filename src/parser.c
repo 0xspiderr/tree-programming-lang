@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../include/errors.h"
+
 /***********************************************************
  * DEFINITIONS
  ***********************************************************/
@@ -13,11 +15,7 @@ Parser_t *new_parser(Lexer_t *lexer)
 {
 	Parser_t *parser = (Parser_t *)malloc(sizeof(Parser_t));
 
-	if (parser == NULL)
-	{
-		fprintf(stderr, "Failed to allocate memory for Parser_t\n");
-		exit(EXIT_FAILURE);
-	}
+	ASSERT_MALLOC(parser);
 
 	parser->lexer = lexer;
 	next_token(parser);

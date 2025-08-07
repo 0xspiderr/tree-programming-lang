@@ -5,6 +5,7 @@
 
 #include <string.h>
 
+#include "../include/errors.h"
 #include "../include/lexer.h"
 #include "../include/token.h"
 
@@ -38,11 +39,7 @@ void exec_repl()
             break;
 
         lexer = new_lexer(line);
-        if (lexer == NULL)
-        {
-            fprintf(stderr, "'%s' lexer not found\n", line);
-            exit(EXIT_FAILURE);
-        }
+		ASSERT_MALLOC(lexer);
 
         for (token = generate_token(lexer); token.type != EOF_T; token = generate_token(lexer))
         {

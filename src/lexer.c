@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../include/errors.h"
+
 /***********************************************************
  * DEFINITIONS
  ***********************************************************/
@@ -16,18 +18,10 @@ Lexer_t *new_lexer(const char *code)
 
     Lexer_t *lexer = (Lexer_t *)malloc(sizeof(Lexer_t));
 
-    if (lexer == NULL)
-    {
-        fprintf(stderr, "Failed to allocate memory for a new lexer\n");
-        exit(EXIT_FAILURE);
-    }
+	ASSERT_MALLOC(lexer);
 
     lexer->code = strdup(code);
-    if (lexer->code == NULL)
-    {
-        fprintf(stderr, "Failed to allocate memory for a new lexer's source code\n");
-        exit(EXIT_FAILURE);
-    }
+	ASSERT_MALLOC(lexer->code);
 
     read_character(lexer);
     return lexer;
@@ -69,11 +63,7 @@ char *read_identifier(Lexer_t *lexer)
     }
 
     identifier = strndup(lexer->code + start_pos, identifier_size);
-    if (identifier == NULL)
-    {
-        fprintf(stderr, "Failed to allocate memory for a new identifier\n");
-        exit(EXIT_FAILURE);
-    }
+	ASSERT_MALLOC(identifier);
 
     return identifier;
 }
@@ -90,11 +80,7 @@ char *read_number(Lexer_t *lexer)
     }
 
     number = strndup(lexer->code + start_pos, number_size);
-    if (number == NULL)
-    {
-        fprintf(stderr, "Failed to allocate memory for a new number\n");
-        exit(EXIT_FAILURE);
-    }
+	ASSERT_MALLOC(number);
 
     return number;
 }

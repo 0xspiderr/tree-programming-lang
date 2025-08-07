@@ -3,16 +3,22 @@ project(tree_programming_lang C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(tree_programming_lang src/tree.c
+add_executable(ctree src/tree.c
         src/run.c
         include/run.h
         src/token.c
         include/token.h
         src/lexer.c
         include/lexer.h
-        tests/test_lexer.c
-        tests/test_lexer.h
         src/ast.c
         include/ast.h
         src/parser.c
-        include/parser.h)
+        include/parser.h
+        include/errors.h
+        test/src/test_lexer.c
+        test/include/test_lexer.h
+
+)
+
+
+
