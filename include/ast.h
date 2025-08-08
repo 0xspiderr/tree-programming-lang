@@ -38,6 +38,7 @@ typedef struct Statement_t
 typedef struct Program_t
 {
 	Statement_t *statements;
+	size_t		 size;
 } Program_t;
 
 /***********************************************************

@@ -16,9 +16,8 @@ typedef struct LexerTest
 	char     *expected_literal;
 } LexerTest;
 
-
 /***********************************************************
- * PROTOTYPES
+ * TESTS
  ***********************************************************/
 void test_generate_token();
 

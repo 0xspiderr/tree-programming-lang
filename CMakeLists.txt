@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25.1)
-project(tree_programming_lang C)
+project(tree C)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -17,6 +17,8 @@ add_executable(ctree src/tree.c
         include/errors.h
         test/src/test_lexer.c
         test/include/test_lexer.h
+        test/src/test_parser.c
+        test/include/test_parser.h
 
 )
 
